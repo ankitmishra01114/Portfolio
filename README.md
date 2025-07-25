@@ -75,10 +75,4 @@ I'm currently pursuing **B.Sc Software Development** at **Tata Institute of Soci
 
 ---
 
-## 📝 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
 ### 💖 Built with love & passion by [Ankit Mishra](https://www.linkedin.com/in/ankit-mishra1114/)
