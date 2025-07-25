@@ -395,8 +395,10 @@ section {
 footer {
     background: #333;
     color: white;
+    max-height: 10px;
     text-align: center;
     padding: 2rem 0;
+
 }
 
 /* Animations */
