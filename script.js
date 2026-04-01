@@ -87,28 +87,33 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
 
     // Send Email
     emailjs.sendForm('service_ambui66', 'template_i3amazx', form)
-        emailjs.sendForm('service_ambui66', 'template_k8nm8yq', form)
     .then(function (response) {
 
-        // ✅ AUTO-REPLY TO USER
-        emailjs.send('service_ambui66', 'template_lcvomcn', {
+        console.log("MAIN EMAIL SENT");
+
+        // ✅ AUTO REPLY TO USER
+        return emailjs.send('service_ambui66', 'template_lcvomcn', {
             name: form.name.value,
             email: form.email.value,
             subject: form.subject.value,
             message: form.message.value
         });
+    })
+    .then(function () {
+
+        console.log("AUTO REPLY SENT");
 
         alert('✅ Message sent successfully!');
         form.reset();
     })
-        .catch(function (error) {
-            console.error("ERROR:", error);
-            alert('❌ Failed to send message. Check console.');
-        })
-        .finally(function () {
-            submitBtn.textContent = 'Send Message';
-            submitBtn.disabled = false;
-        });
+    .catch(function (error) {
+        console.error("ERROR:", error);
+        alert('❌ Failed to send message');
+    })
+    .finally(function () {
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
+    });
 });
 
 // ==============================
