@@ -87,11 +87,20 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
 
     // Send Email
     emailjs.sendForm('service_ambui66', 'template_i3amazx', form)
-        .then(function (response) {
-            console.log("SUCCESS:", response);
-            alert('✅ Message sent successfully!');
-            form.reset();
-        })
+        emailjs.sendForm('service_ambui66', 'template_k8nm8yq', form)
+    .then(function (response) {
+
+        // ✅ AUTO-REPLY TO USER
+        emailjs.send('service_ambui66', 'template_lcvomcn', {
+            name: form.name.value,
+            email: form.email.value,
+            subject: form.subject.value,
+            message: form.message.value
+        });
+
+        alert('✅ Message sent successfully!');
+        form.reset();
+    })
         .catch(function (error) {
             console.error("ERROR:", error);
             alert('❌ Failed to send message. Check console.');
