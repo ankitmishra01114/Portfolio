@@ -61,24 +61,54 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     }
     
     // Email validation
+    // EmailJS Initialization
+(function () {
+    emailjs.init("c0q1kPcbbWzPEzzhS");
+})();
+
+// Contact form handling (REAL EMAIL SENDING)
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const submitBtn = form.querySelector('.submit-btn');
+
+    // Get values
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    // Validation
+    if (!name || !email || !subject || !message) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         alert('Please enter a valid email address.');
         return;
     }
-    
-    // Simulate form submission
-    const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
+
+    // Button loading state
     submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
-    
-    setTimeout(() => {
-        alert(`Thank you, ${name}! Your message has been sent successfully. I'll get back to you soon.`);
-        this.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 1500);
+
+    // Send email using EmailJS
+    emailjs.sendForm('service_ambui66', 'template_i3amazx', form)
+        .then(function () {
+            alert('✅ Message sent successfully!');
+            form.reset();
+        })
+        .catch(function (error) {
+            alert('❌ Failed to send message. Try again.');
+            console.error(error);
+        })
+        .finally(function () {
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled = false;
+        });
 });
 
 // Add some interactive hover effects
